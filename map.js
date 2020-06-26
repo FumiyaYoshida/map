@@ -18,7 +18,7 @@ $(function () {
     map.on('load', function () {
         // ポリゴン設定
         //map.addSource(app.MapResource.polygon_sample_layer.source, app.MapResource.rectangle_source);
-        map.addSource(polygon_sample_source, {
+        map.addSource("polygon_sample_source", {
             type: "geojson",
             data: {
                 type: 'FeatureCollection',
@@ -81,10 +81,20 @@ $(function () {
                         }
                     }
                 ]
-        }
+            }
+        }),
 
         // 塗りつぶし設定
-        map.addLayer(app.MapResource.polygon_sample_layer);
+            map.addLayer({
+                "id": "polygon_sample_fill_layer",
+                "source": "polygon_sample_source",
+                "layout": {},
+                "type": "fill",
+                "paint": {
+                    'fill-color': ["get", "fillColor"],
+                    'fill-opacity': 0
+                }
+            });
 
         // シンボル設定
         map.addLayer({
@@ -168,10 +178,11 @@ function search() {
             { padding: 50 }
         );
     } else {
-        alert(searchText + "というエリアは存在しません。");
+        alert("Area " + searchText + " does not exist.");
     }
 }
 
 
 
 //fitboundsで中心、ズームを特定してくれる。
+//turfも使う
