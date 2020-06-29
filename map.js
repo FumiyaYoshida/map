@@ -83,11 +83,16 @@ function search() {
     app.MapResource.rectangle_source.data.features.forEach(function (feature) {
         if (feature.properties.name == searchText) {
             isSearchHit = 1;
+
+            var $elementReference = document.getElementById("rectangleArea-range");
+            $elementReference.value = 100;
+            rectangleAreaRange(100)
+
             var line = turf.lineString(feature.geometry.coordinates[0]);
             var bbox = turf.bbox(line);
             map.fitBounds(
                 bbox,
-                { padding: 50 }
+                { padding: 150 }
             );
         }
     });
