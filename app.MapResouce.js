@@ -79,32 +79,6 @@ app.MapResource = {
         }
     },
 
-    symbol_sample_layer: {
-        "id": "polygon_sample_symbol_layer",
-        "type": "symbol",
-        "source": "polygon_sample_source",
-        "layout": {
-            "text-field": "{name}"
-        },
-        "paint": {
-            'text-color': ["get", "symbolColor"],
-            'text-opacity': 0
-        }
-    },
-
-    border_sample_layer: {
-        "id": "polygon_sample_border_layer",
-        "type": "line",
-        "source": "polygon_sample_source",
-        "layout": {},
-        "paint": {
-            "line-color": ["get", "fillColor"],
-            "line-width": 5,
-            "line-opacity": 0
-        }
-    },
-
-    //以下は未使用
     /* モバイルシンボルのレイヤ定義 */
     mobile_positions_layer: {
         "id": "mobile-symbols-layer",
