@@ -78,26 +78,27 @@ function distortedAreaRange(value) {
 
 function search() {
     var searchText = document.searchArea.searchText.value;
-    var isSearchHit = 0;
 
-    app.MapResource.rectangle_source.data.features.forEach(function (feature) {
-        if (feature.properties.name == searchText) {
-            isSearchHit = 1;
-
-            var $elementReference = document.getElementById("rectangleArea-range");
-            $elementReference.value = 100;
-            rectangleAreaRange(100)
-
-            var line = turf.lineString(feature.geometry.coordinates[0]);
-            var bbox = turf.bbox(line);
-            map.fitBounds(
-                bbox,
-                { padding: 150 }
-            );
-        }
-    });
-
-    if (isSearchHit == 0) {
+    const feature = app.MapResource.rectangle_source.data.features.find(feature => feature.properties.name == searchText)
+    if (typeof feature === "undefined") {
         alert(searchText + " doesn't exist.");
+        return;
     }
+
+    var $elementReference = document.getElementById("rectangleArea-range");
+    $elementReference.value = 100;
+    rectangleAreaRange(100);
+
+    var line = turf.lineString(feature.geometry.coordinates[0]);
+    var bbox = turf.bbox(line);
+    map.fitBounds(
+        bbox,
+        { padding: 150 }
+    );
+
+    var center = turf.center({ type: "FeatureCollection", features: [feature] });
+    var popup = new mapboxgl.Popup({ closeOnClick: false })
+        .setLngLat(center.geometry.coordinates)
+        .setHTML("<h1>" + feature.properties.name + "</h1><br><p>" + feature.properties.description + "</p>")
+        .addTo(map);
 }

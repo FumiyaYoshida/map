@@ -23,7 +23,8 @@ app.MapResource = {
                             "id": "polygon_sample",
                             "name": "North",
                             "fillColor": "#0f0",
-                            "symbolColer": "black"
+                            "symbolColer": "black",
+                            "description": "北エリア"
                         }
                 },
                 {
@@ -42,7 +43,8 @@ app.MapResource = {
                         "id": "polygon_sample",
                         "name": "Center",
                         "fillColor": "#f00",
-                        "symbolColor": "black"
+                        "symbolColor": "black",
+                        "description": "中心エリア"
                     }
                 },
                 {
@@ -61,7 +63,8 @@ app.MapResource = {
                         "id": "polygon_sample",
                         "name": "West",
                         "fillColor": "#ff0",
-                        "symbolColor": "black"
+                        "symbolColor": "black",
+                        "description": "西エリア"
                     }
                 }
             ]
